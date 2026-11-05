@@ -14,6 +14,3 @@
 
 ---
 
-> ℹ️ **Nota de Desarrollo:**  
-> La rama `main` se reserva exclusivamente para versiones estables y entregas de producción.  
-> Todo el desarrollo activo y los entregables del Sprint 1 se encuentran en la rama `develop`.
