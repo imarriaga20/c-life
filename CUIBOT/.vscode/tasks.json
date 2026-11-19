@@ -1,0 +1,116 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "CUIBOT: preparar todo",
+      "detail": "Instala dependencias de servidor y cliente, y compila la interfaz.",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "CUIBOT: instalar servidor",
+        "CUIBOT: instalar cliente",
+        "CUIBOT: compilar interfaz"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "CUIBOT: instalar servidor",
+      "type": "shell",
+      "command": "npm.cmd install",
+      "options": {
+        "cwd": "${workspaceFolder}/server"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "CUIBOT: instalar cliente",
+      "type": "shell",
+      "command": "npm.cmd install",
+      "options": {
+        "cwd": "${workspaceFolder}/client"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "CUIBOT: compilar interfaz",
+      "type": "npm",
+      "script": "build",
+      "path": "client",
+      "problemMatcher": ["$tsc"]
+    },
+    {
+      "label": "CUIBOT: iniciar API",
+      "detail": "Arranca el backend en http://localhost:4000 (sirve también la interfaz compilada).",
+      "type": "npm",
+      "script": "start",
+      "path": "server",
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "cuibot-api",
+        "pattern": {
+          "regexp": "^(?:CUIBOT-ERROR) (.*)$",
+          "message": 1
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "^(?:> )?cuibot-server@|^> node ",
+          "endsPattern": "\\[CUIBOT\\] API escuchando"
+        }
+      }
+    },
+    {
+      "label": "CUIBOT: API con recarga automática",
+      "detail": "Igual que la API, pero reinicia el servidor al guardar archivos del backend.",
+      "type": "npm",
+      "script": "dev",
+      "path": "server",
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "cuibot-api-watch",
+        "pattern": {
+          "regexp": "^(?:CUIBOT-ERROR) (.*)$",
+          "message": 1
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "^(?:> )?cuibot-server@|^> node ",
+          "endsPattern": "\\[CUIBOT\\] API escuchando"
+        }
+      }
+    },
+    {
+      "label": "CUIBOT: interfaz en desarrollo",
+      "detail": "Servidor de Vite en http://localhost:5173 con recarga en caliente.",
+      "type": "npm",
+      "script": "dev",
+      "path": "client",
+      "isBackground": true,
+      "options": {
+        "env": {
+          "NO_COLOR": "1"
+        }
+      },
+      "problemMatcher": {
+        "owner": "cuibot-vite",
+        "pattern": {
+          "regexp": "^(?:VITE-ERROR) (.*)$",
+          "message": 1
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "VITE v",
+          "endsPattern": "ready in"
+        }
+      }
+    },
+    {
+      "label": "CUIBOT: abrir en el navegador",
+      "type": "shell",
+      "command": "start http://localhost:4000",
+      "problemMatcher": []
+    }
+  ]
+}

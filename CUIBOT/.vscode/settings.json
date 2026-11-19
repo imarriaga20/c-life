@@ -1,0 +1,36 @@
+{
+  "files.exclude": {
+    "**/node_modules": true,
+    "**/.vite": true,
+    "client/dist": true
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "client/dist": true,
+    "**/package-lock.json": true
+  },
+  "files.watcherExclude": {
+    "**/node_modules/**": true,
+    "client/dist/**": true
+  },
+  "typescript.tsdk": "client/node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "editor.rulers": [100],
+  "files.associations": {
+    "*.env.example": "dotenv",
+    "*.sql": "sql"
+  },
+  "tailwindCSS.emmetCompletions": true,
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "sqltools.connections": [
+    {
+      "name": "CUIBOT (MySQL local)",
+      "driver": "MySQL",
+      "server": "127.0.0.1",
+      "port": 3306,
+      "database": "cuibot_db",
+      "username": "root",
+      "askForPassword": false
+    }
+  ]
+}

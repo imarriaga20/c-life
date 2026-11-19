@@ -1,0 +1,2 @@
+# Conservar los scripts originales byte por byte (sin normalizar saltos de línea)
+database/originales/** -text

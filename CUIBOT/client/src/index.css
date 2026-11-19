@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 160 18% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 160 18% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 160 18% 10%;
+    --primary: 170 25% 54%;
+    --primary-foreground: 160 18% 10%;
+    --primary-ink: 170 31% 35%;
+    --secondary: 164 100% 86%;
+    --secondary-foreground: 160 18% 10%;
+    --muted: 165 35% 96%;
+    --muted-foreground: 165 10% 38%;
+    --accent: 164 100% 93%;
+    --accent-foreground: 160 18% 12%;
+    --destructive: 0 72% 48%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 170 22% 86%;
+    --input: 170 18% 78%;
+    --ring: 170 31% 35%;
+    --radius: 0.9rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background font-body text-foreground antialiased;
+    background-image:
+      radial-gradient(60rem 32rem at 100% -10%, rgba(168, 255, 230, 0.35), transparent 60%),
+      radial-gradient(48rem 28rem at -10% 0%, rgba(108, 166, 156, 0.14), transparent 55%);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    @apply font-heading;
+    text-wrap: balance;
+  }
+
+  ::selection {
+    background: #a8ffe6;
+    color: #121a18;
+  }
+
+  :focus-visible {
+    outline: 2px solid #3f776d;
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  /* ------------------------- Animación Pill Halo ------------------------- */
+  .pill-halo {
+    position: relative;
+    transition: box-shadow 0.3s ease, transform 0.15s ease, background-color 0.2s ease;
+  }
+
+  .pill-halo::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 9999px;
+    border: 2px solid rgba(168, 255, 230, 0.95);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .pill-halo:hover::before,
+  .pill-halo:focus-visible::before {
+    animation: halo-ring 1.5s ease-out infinite;
+  }
+
+  .pill-halo:hover {
+    box-shadow:
+      0 0 0 3px rgba(168, 255, 230, 0.55),
+      0 0 26px 6px rgba(168, 255, 230, 0.55);
+  }
+
+  .pill-halo:active {
+    transform: translateY(1px) scale(0.99);
+  }
+
+  @keyframes halo-ring {
+    0% {
+      opacity: 0.9;
+      transform: scale(0.95);
+    }
+    70% {
+      opacity: 0;
+      transform: scale(1.14);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(1.14);
+    }
+  }
+
+  .cuibot-card {
+    @apply rounded-2xl border border-primary/20 bg-card shadow-[0_10px_30px_-18px_rgba(18,26,24,0.35)];
+  }
+
+  .scrollbar-suave::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  .scrollbar-suave::-webkit-scrollbar-thumb {
+    background: rgba(108, 166, 156, 0.45);
+    border-radius: 9999px;
+  }
+
+  .scrollbar-suave::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "CUIBOT: API (depurar)",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/server/src/index.js",
+      "cwd": "${workspaceFolder}/server",
+      "envFile": "${workspaceFolder}/server/.env",
+      "console": "integratedTerminal",
+      "skipFiles": ["<node_internals>/**", "**/node_modules/**"]
+    },
+    {
+      "name": "CUIBOT: interfaz en Chrome",
+      "type": "pwa-chrome",
+      "request": "launch",
+      "url": "http://localhost:5173",
+      "webRoot": "${workspaceFolder}/client/src",
+      "preLaunchTask": "CUIBOT: interfaz en desarrollo"
+    },
+    {
+      "name": "CUIBOT: app compilada en Chrome",
+      "type": "pwa-chrome",
+      "request": "launch",
+      "url": "http://localhost:4000",
+      "webRoot": "${workspaceFolder}/client/src"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "CUIBOT: API + interfaz",
+      "configurations": ["CUIBOT: API (depurar)", "CUIBOT: interfaz en Chrome"],
+      "stopAll": true
+    }
+  ]
+}
